@@ -141,22 +141,23 @@
   </div>
 </section>
 
-<!-- Paper abstract -->
-<section class="section hero is-light">
+
+<!-- End paper abstract -->
+<section class="section">
   <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            Audio-Visual Segmentation (AVS) aims to achieve pixel-level localization of sound sources in videos, while Audio-Visual Semantic Segmentation (AVSS), as an extension of AVS, further pursues semantic understanding of audio-visual scenes. However, since the AVSS task requires the establishment of audio-visual correspondence and semantic understanding simultaneously, we observe that previous methods have struggled to handle this mashup of objectives in end-to-end training, resulting in insufficient learning and sub-optimization. Therefore, we propose a two-stage training strategy called Stepping Stones, which decomposes the AVSS task into two simple subtasks from localization to semantic understanding, which are fully optimized in each stage to achieve step-by-step global optimization. This training strategy has also proved its generalization and effectiveness on existing methods. To further improve the performance of AVS tasks, we propose a novel framework Adaptive Audio Visual Segmentation, in which we incorporate an adaptive audio query generator and integrate masked attention into the transformer decoder, facilitating the adaptive fusion of visual and audio features.  Extensive experiments demonstrate that our methods achieve state-of-the-art results on all three AVS benchmarks. The code is publicly available at https://ss-aavs.github.io/.
-          </p>
-        </div>
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+              <h2 class="title is-3">Abstract</h2>
+              <div class="content has-text-justified">
+                <p>
+                  Audio-Visual Segmentation (AVS) aims to achieve pixel-level localization of sound sources in videos, while Audio-Visual Semantic Segmentation (AVSS), as an extension of AVS, further pursues semantic understanding of audio-visual scenes. However, since the AVSS task requires the establishment of audio-visual correspondence and semantic understanding simultaneously, we observe that previous methods have struggled to handle this mashup of objectives in end-to-end training, resulting in insufficient learning and sub-optimization. Therefore, we propose a two-stage training strategy called Stepping Stones, which decomposes the AVSS task into two simple subtasks from localization to semantic understanding, which are fully optimized in each stage to achieve step-by-step global optimization. This training strategy has also proved its generalization and effectiveness on existing methods. To further improve the performance of AVS tasks, we propose a novel framework Adaptive Audio Visual Segmentation, in which we incorporate an adaptive audio query generator and integrate masked attention into the transformer decoder, facilitating the adaptive fusion of visual and audio features.  Extensive experiments demonstrate that our methods achieve state-of-the-art results on all three AVS benchmarks..
+                </p>
+              </div>
+          </div>
       </div>
-    </div>
   </div>
 </section>
-<!-- End paper abstract -->
 
 
 <section class="hero teaser">
@@ -166,7 +167,7 @@
           <img src="static/images/model.png" alt="MY ALT TEXT"/>
           <br><br>
           <h2 class="subtitle has-text-justified">
-              <p> To solve this problem and boost the performance of previous AVSS methods, we propose a simple yet effective two-stage progressive training strategy called Stepping Stones to decompose the intricate AVSS task into two relatively simple subtasks to be fully learned in the two stages. In the first stage, the model is trained using binary labels without semantic information, prioritizing the alignment of audio and visual modalities to establish fine-grained correlations at the pixel level.  Subsequently, in the second stage, the model is trained with semantic labels as supervision, leveraging the sound source localization results from the first stage as stepping stones. These stepping stones serve as a shortcut for the model to readily recognize sounding pixels during training, thus focusing on the semantic understanding of the sound source. This approach is generalizable and can be readily applied to existing end-to-end AVSS models. Moreover, acknowledging the considerable error between the first stage results and ground truth during inference, we also introduce the Robust Audio-aware Key Generator to robustly integrate auditory information into visual features as keys in the cross-modal cross-attention module. Since the second stage leverages the sound source localization results as prior knowledge, the model can focus solely on the semantic comprehension of a given sound source region, thus overcoming the challenge of ambiguous supervision signals during end-to-end learning. Furthermore, we comprehensively train audio-visual alignment and visually dominant semantic understanding in two separate training phases, which facilitates the optimization of both subtasks of the model, leading to improved global optimization.
+              <p> Overview of AAVS framework.  (1) Visual and audio features are extracted by the pre-trained encoder; (2) Adaptive Audio Query Generator is proposed to generate audio queries; (3) In the transformer decoder, audio-aware queries are integrated with visual feature maps, and masked cross-attention facilitates queries to dynamically adjust the attention range; (4) Finally, refined queries are merged with the mask feature to obtain the final prediction mask. <span style="color: red;">Red arrows</span> indicate newly introduced methods when implementing the \textit{Stepping Stones} strategy.
               </p>
           </h2>
       </div>
@@ -181,12 +182,22 @@
           <img src="static/images/results.png" alt="MY ALT TEXT"/>
           <br><br>
           <h2 class="subtitle has-text-justified">
-              <p> We conduct a comprehensive comparison between our AAVS model and existing methods on the AVSBench dataset. Our AAVS model outperforms previous methods in terms of mIoU and F-score for both the S4 and MS3 subtasks. Specifically, for the S4 subtask, AAVS demonstrates performance improvements of 1.12% in mIoU and 0.93% in the F-score. For the MS3 subtask, AAVS showcases performance improvements of 2.50% in mIoU and 0.23% in the F-score. We attribute these enhancements to the efficacy of our proposed method, which enhances audio-visual modal alignment through adaptive fusion of visual and audio features. It is noteworthy that the improvement on the MS3 subtask is significantly higher than that on the S4 subtask, which we attribute to the greater complexity of the MS3 task scenarios and the adaptive nature of our approach in addressing multi-sound source localization challenges. For the AVSS subtask, we also conduct experiments to compare our approach with previous work. As depicted in the table, the AAVS model alone demonstrates performance enhancements of 4.62% mIoU and 4.33% F-score. Moreover, when the Stepping Stones training strategy is applied to the AAVS model, performance is further substantially improved by 7.22% mIoU and 6.87% F-score. This significant improvement arises partly from the capabilities of the AAVS model itself and partly from the \textit{Stepping Stones} training strategy, which aids the model in learning audiovisual alignment and semantic understanding more effectively.
-              </p>
+              <p> Quantitative (mIoU, F-score) results on AVSBench dataset with transformer-based visual backbone. </p>
+              <p>* indicates that the model uses the <i>Stepping Stones</i> strategy.</p>
           </h2>
       </div>
   </div>
 </section>
+<style>
+  .carousel {
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+  }
+  .item {
+    text-align: center; /* 确保图片和文字在容器内居中 */
+  }
+</style>
 <section class="hero is-small">
   <div class="hero-body">
     <h2 class="title is-3 has-text-centered">Qualitative Comparision</h2>
